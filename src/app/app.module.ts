@@ -7,9 +7,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material-module';
 
+import { LineChartComponent } from './line-chart/line-chart.component';
+import { MultiSeriesComponent } from './multi-series-line-chart/multi-series.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { StackedBarChartComponent } from './stacked-bar-chart/stacked-bar-chart.component';
+import { BrushZoomComponent } from './brush-zoom/brush-zoom.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LineChartComponent,
+    MultiSeriesComponent,
+    BarChartComponent,
+    StackedBarChartComponent,
+    BrushZoomComponent,
+    PieChartComponent,
   ],
   imports: [
     BrowserModule,
