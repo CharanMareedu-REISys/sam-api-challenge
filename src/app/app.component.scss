@@ -18,3 +18,19 @@
   .filter-toggle{
     border-radius: 50%;
   }
+  .mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary {
+    background-color: #3aafa9;
+}
+
+.mat-mini-fab.mat-primary{
+  background-color: orange;
+}
+
+// .mat-focused {
+//   color: orange;
+// }
+
+.mat-icon {
+  transform: scale(2);
+}
+  

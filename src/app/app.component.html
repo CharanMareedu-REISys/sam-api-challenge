@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar style="background-color: #425e5e;color: white;">
   <span>SAM.GOV</span>
 </mat-toolbar>
 <mat-sidenav-container class="example-container">
@@ -36,11 +36,12 @@
     </form>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div>
-
+    <div style="background-color: #3aafa9;color: white;height: 60px;display: flex;
+    align-items: center;padding-left: 10px;">
       <button mat-mini-fab color="primary" aria-label="Show Filters" (click)="sidenav.toggle()">
-        <mat-icon>{{opened ? "navigate_before":"navigate_next"}}</mat-icon>
+        <mat-icon inline='"true"'>{{opened ? "navigate_before":"navigate_next"}}</mat-icon>
       </button>
+      <strong style="margin-left: 10px;">Toggle Filters</strong>
     </div>
 
     Graph goes here
