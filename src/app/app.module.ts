@@ -18,11 +18,13 @@ import { ListGraphComponent } from './list-graph/list-graph.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { OrgAwardedAmountComponent } from './graphs/org-awarded-amount.component';
+import { SetAsideByOppsTypeComponent } from './graphs/setaside-opps-type.component';
 
 const appRoutes: Routes = [
   { path: '', component: ListGraphComponent },
   { path: 'filters', component: SamFiltersComponent },
   { path: 'org-awarded-amount', component: OrgAwardedAmountComponent },
+  { path: 'setaside-opps-type', component: SetAsideByOppsTypeComponent },
 ];
 
 @NgModule({
@@ -37,6 +39,7 @@ const appRoutes: Routes = [
     SamFiltersComponent,
     ListGraphComponent,
     OrgAwardedAmountComponent,
+    SetAsideByOppsTypeComponent
   ],
   imports: [
     BrowserModule,

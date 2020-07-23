@@ -22,10 +22,10 @@ export class ListGraphComponent implements OnInit {
       routerLink : "/org-awarded-amount"
     },
     {
-      title: "Stacked Bar Chart",
+      title: "SetAside By Opportunity Types",
       imgUrl: "../assets/stacked-bar.png",
       desc: "Stacked Bar Chart",
-      routerLink : "/filters"
+      routerLink : "/setaside-opps-type"
     },
     {
       title: "Line Chart",
