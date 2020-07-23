@@ -16,10 +16,10 @@ export class ListGraphComponent implements OnInit {
 
   graphList: Graph[] = [
     {
-      title: "Multi-Series Line Chart",
+      title: "Awarded Amounts by Organization",
       imgUrl: "../assets/multi.png",
       desc: "Multi-Series Line Chart",
-      routerLink : "/filters"
+      routerLink : "/org-awarded-amount"
     },
     {
       title: "Stacked Bar Chart",
