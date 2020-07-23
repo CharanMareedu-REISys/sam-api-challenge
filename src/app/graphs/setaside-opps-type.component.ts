@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { REPORTFILTERS } from '../sam-filters/filter-constant';
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+
 
 @Component({
   selector: "setaside-opps-type",
@@ -7,9 +8,15 @@ import { REPORTFILTERS } from '../sam-filters/filter-constant';
 })
 export class SetAsideByOppsTypeComponent {
   
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.httpClient.get('http://localhost:3000/setAsideByOppsType')
+                   .subscribe(res => {
+                     let data = res;
+                     console.log(data);
+                   })
+  }
 
   getFormData(evt) {
     console.log(evt);
