@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, Input } from '@angular/core';
 
 import * as d3 from 'd3-selection';
 import * as d3Scale from 'd3-scale';
@@ -23,6 +23,8 @@ export interface Margin {
 })
 export class StackedBarChartComponent implements OnInit {
 
+    @Input() data = null;
+
     title = 'Stacked Bar Chart';
 
     private margin: Margin;
@@ -40,9 +42,15 @@ export class StackedBarChartComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {
+        console.log(this.data);
         this.initMargins();
         this.initSvg();
-        this.drawChart(SAMPLE_DATA);
+        this.drawChart(this.data);
+    }
+
+    ngOnChanges(c) {
+        console.log(this.data);
+        console.log(c);
     }
 
     private initMargins() {

@@ -22,8 +22,6 @@ export class MultiSeriesComponent implements OnInit {
 
     title = 'Multi-Series Line Chart';
 
-    data: any;
-
     svg: any;
     margin = {top: 20, right: 80, bottom: 30, left: 50};
     g: any;
