@@ -1,7 +1,7 @@
 <mat-grid-list cols="2" rowHeight="2:1" style="margin-left: 20%;margin-right: 20%;padding-top: 20px;">
     <mat-grid-tile *ngFor="let graph of graphList">
       <div style="padding-left: 40px;">
-        <a [routerLink]="graph.routerLink">
+        <a [routerLink]="graph.routerLink" class="chart-links">
             <h2 class="list-header">
                 {{graph.title}}
             </h2>
