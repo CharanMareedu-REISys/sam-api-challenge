@@ -16,6 +16,7 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { SamFiltersComponent } from './sam-filters/sam-filters.component';
 import { ListGraphComponent } from './list-graph/list-graph.component';
 import { Routes, RouterModule } from '@angular/router';
+import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: '', component: ListGraphComponent },
@@ -41,9 +42,10 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

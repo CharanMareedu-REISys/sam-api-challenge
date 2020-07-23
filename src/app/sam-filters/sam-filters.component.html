@@ -18,18 +18,18 @@
     </mat-form-field>
     <mat-form-field appearance="outline" *ngIf="!hideFilters.setAside">
         <mat-label>Set Aside</mat-label>
-        <input type="text" placeholder="PSC Code" aria-label="set aside" matInput formControlName="setAside"
+        <input type="text" placeholder="Set Aside" aria-label="set aside" matInput formControlName="setAside"
             [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of setAsideFilteredOptions | async" [value]="option">
-                {{option}}
+            <mat-option *ngFor="let option of setAsideFilteredOptions | async" [value]="option.name">
+                {{option.name}}
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
     <mat-form-field appearance="outline" *ngIf="!hideFilters.opportunities">
-        <mat-label>Opportunities Type</mat-label>
-        <mat-select type="text" placeholder="Opportunities Type" aria-label="opportunities" formControlName="opportunities" multiple>
-            <mat-option *ngFor="let naics of options.naicsValue" [value]="naics">{{naics}}</mat-option>
+        <mat-label>Opportunity Type</mat-label>
+        <mat-select type="text" placeholder="Type of Notice" aria-label="opportunities" formControlName="opportunities" multiple>
+            <mat-option *ngFor="let opp of options.opportunityTypes" [value]="opp">{{opp}}</mat-option>
         </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline" *ngIf="!hideFilters.organizations">
@@ -37,8 +37,8 @@
         <input type="text" placeholder="Organizations" aria-label="organizations" matInput formControlName="organizations"
             [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of orgsFilteredOptions | async" [value]="option">
-                {{option}}
+            <mat-option *ngFor="let option of orgsFilteredOptions | async" [value]="option.name">
+                {{option.name}}
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
