@@ -1,0 +1,46 @@
+<mat-toolbar style="background-color: #3aafa9;color: white;padding-left: 25%;">
+    <h2>Add Filters</h2>
+</mat-toolbar>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="form-group">
+    <mat-form-field appearance="outline" *ngIf="!hideFilters.startDate">
+        <mat-label>Start Date</mat-label>
+        <input matInput id="startDate" name="startDate" formControlName="startDate" [matDatepicker]="picker"
+            placeholder="Choose start date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline" *ngIf="!hideFilters.endDate">
+        <mat-label>End Date</mat-label>
+        <input matInput id="endDate" name="endDate" formControlName="endDate" [matDatepicker]="picker"
+            placeholder="Choose end date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="outline" *ngIf="!hideFilters.setAside">
+        <mat-label>Set Aside</mat-label>
+        <input type="text" placeholder="PSC Code" aria-label="set aside" matInput formControlName="setAside"
+            [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of setAsideFilteredOptions | async" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field appearance="outline" *ngIf="!hideFilters.opportunities">
+        <mat-label>Opportunities Type</mat-label>
+        <mat-select type="text" placeholder="Opportunities Type" aria-label="opportunities" formControlName="opportunities" multiple>
+            <mat-option *ngFor="let naics of options.naicsValue" [value]="naics">{{naics}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" *ngIf="!hideFilters.organizations">
+        <mat-label>Organizations</mat-label>
+        <input type="text" placeholder="Organizations" aria-label="organizations" matInput formControlName="organizations"
+            [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of orgsFilteredOptions | async" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <button mat-flat-button color="primary" type="submit">Submit</button>
+</form>

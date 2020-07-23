@@ -1,0 +1,15 @@
+<mat-grid-list cols="2" rowHeight="2:1" style="margin-left: 20%;margin-right: 20%;padding-top: 20px;">
+    <mat-grid-tile *ngFor="let graph of graphList">
+      <div style="padding-left: 40px;">
+        <a [routerLink]="graph.routerLink">
+            <h2 class="list-header">
+                {{graph.title}}
+            </h2>
+            <div>
+                <img [src]="graph.imgUrl" style="max-width: 60%;
+                max-height: 60%;"/>
+            </div>
+        </a>
+    </div>
+    </mat-grid-tile>
+  </mat-grid-list>
