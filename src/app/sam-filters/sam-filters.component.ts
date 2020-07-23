@@ -53,9 +53,9 @@ export class SamFiltersComponent implements OnInit {
   constructor(private fb: FormBuilder, private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    // this.showFilters.forEach((filter) => {
-    //   this.hideFilters[filter] = false;
-    // });
+    this.showFilters.forEach((filter) => {
+      this.hideFilters[filter] = false;
+    });
     var headers = new HttpHeaders()
       .set("content-type", "application/json")
       .set("Access-Control-Request-Headers","*")
