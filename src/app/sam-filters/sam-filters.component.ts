@@ -43,11 +43,11 @@ export class SamFiltersComponent implements OnInit {
   });
 
   hideFilters = {
-    startDate: false,
-    endDate: false,
-    opportunities: false,
-    setAside: false,
-    organizations: false,
+    startDate: true,
+    endDate: true,
+    opportunities: true,
+    setAside: true,
+    organizations: true
   };
 
   constructor(private fb: FormBuilder, private httpClient: HttpClient) {}
