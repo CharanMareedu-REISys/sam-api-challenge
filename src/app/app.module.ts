@@ -17,12 +17,14 @@ import { SamFiltersComponent } from './sam-filters/sam-filters.component';
 import { ListGraphComponent } from './list-graph/list-graph.component';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
+import { OrgAwardedAmountComponent } from './graphs/org-awarded-amount.component';
 
 const appRoutes: Routes = [
   { path: '', component: ListGraphComponent },
-  { path: 'filters', component: SamFiltersComponent }
-  
+  { path: 'filters', component: SamFiltersComponent },
+  { path: 'org-awarded-amount', component: OrgAwardedAmountComponent },
 ];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +36,7 @@ const appRoutes: Routes = [
     PieChartComponent,
     SamFiltersComponent,
     ListGraphComponent,
+    OrgAwardedAmountComponent,
   ],
   imports: [
     BrowserModule,
