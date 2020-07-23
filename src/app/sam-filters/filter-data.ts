@@ -64,3 +64,16 @@ export const SetAsides = [
     value: "WOSBSS",
   },
 ];
+
+
+export const OpportunityTypes = [
+    "Special Notice",
+    "Sources Sought",
+    "Presolicitation",
+    "Intent to Bundle",
+    "Solicitation",
+    "Combined Synopsis/Solicitation",
+    "Award Notice",
+    "Justification",
+    "Sale of Surplus Property",
+  ];

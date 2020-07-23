@@ -28,17 +28,25 @@
     </mat-form-field>
     <mat-form-field appearance="outline" *ngIf="!hideFilters.opportunities">
         <mat-label>Opportunity Type</mat-label>
-        <mat-select type="text" placeholder="Type of Notice" aria-label="opportunities" formControlName="opportunities" multiple>
+        <mat-select type="text" placeholder="Type of Notice" aria-label="opportunities" formControlName="opportunities"
+            multiple>
             <mat-option *ngFor="let opp of options.opportunityTypes" [value]="opp">{{opp}}</mat-option>
         </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline" *ngIf="!hideFilters.organizations">
-        <mat-label>Organizations</mat-label>
-        <input type="text" placeholder="Organizations" aria-label="organizations" matInput formControlName="organizations"
-            [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let option of orgsFilteredOptions | async" [value]="option.name">
-                {{option.name}}
+        <mat-chip-list #chipList>
+            <mat-chip *ngFor="let org of orgs" [selectable]="selectable" [removable]="removable"
+                (removed)="remove(org)">
+                {{org}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Select Organization" #orgInput formControlName="organizations" [matAutocomplete]="auto"
+                [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let org of orgsFilteredOptions | async" [value]="org">
+                {{org}}
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
