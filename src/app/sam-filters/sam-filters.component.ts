@@ -180,10 +180,7 @@ export class SamFiltersComponent implements OnInit {
         optionsObj
       )
       .subscribe((res) => {
-        console.log(res);
         let data = res["body"]["_embedded"];
-        console.log(data);
-
         let orgs = data.map((element) => {
           return element["org"]["name"];
         });
