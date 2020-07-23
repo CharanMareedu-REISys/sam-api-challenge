@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, Input } from '@angular/core';
 
 import * as d3 from 'd3-selection';
 import * as d3Scale from 'd3-scale';
@@ -7,8 +7,6 @@ import * as d3Shape from 'd3-shape';
 import * as d3Array from 'd3-array';
 import * as d3Axis from 'd3-axis';
 
-import { TEMPERATURES } from '../shared';
-
 @Component({
     selector: 'app-multi-series-line-chart',
     encapsulation: ViewEncapsulation.None,
@@ -16,6 +14,11 @@ import { TEMPERATURES } from '../shared';
     styleUrls: ['./multi-series.component.css']
 })
 export class MultiSeriesComponent implements OnInit {
+    @Input() data;
+    @Input() width;
+    @Input() height;
+    @Input() startDate;
+    @Input() endDate;
 
     title = 'Multi-Series Line Chart';
 
@@ -24,8 +27,8 @@ export class MultiSeriesComponent implements OnInit {
     svg: any;
     margin = {top: 20, right: 80, bottom: 30, left: 50};
     g: any;
-    width: number;
-    height: number;
+    svgWidth: number;
+    svgHeight: number;
     x;
     y;
     z;
@@ -36,10 +39,6 @@ export class MultiSeriesComponent implements OnInit {
     }
 
     ngOnInit() {
-
-        this.data = TEMPERATURES.map((v) => v.values.map((v) => v.date ))[0];
-        //.reduce((a, b) => a.concat(b), []);
-
         this.initChart();
         this.drawAxis();
         this.drawPath();
@@ -48,12 +47,12 @@ export class MultiSeriesComponent implements OnInit {
     private initChart(): void {
         this.svg = d3.select('svg');
 
-        this.width = this.svg.attr('width') - this.margin.left - this.margin.right;
-        this.height = this.svg.attr('height') - this.margin.top - this.margin.bottom;
+        this.svgWidth = this.width - this.margin.left - this.margin.right;
+        this.svgHeight = this.height - this.margin.top - this.margin.bottom;
 
         this.g = this.svg.append('g').attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
 
-        this.x = d3Scale.scaleTime().range([0, this.width]);
+        this.x = d3Scale.scaleTime().domain([this.startDate, this.endDate]).range([0, this.svgWidth]);
         this.y = d3Scale.scaleLinear().range([this.height, 0]);
         this.z = d3Scale.scaleOrdinal(d3ScaleChromatic.schemeCategory10);
 
@@ -62,14 +61,12 @@ export class MultiSeriesComponent implements OnInit {
             .x( (d: any) => this.x(d.date) )
             .y( (d: any) => this.y(d.temperature) );
 
-        this.x.domain(d3Array.extent(this.data, (d: Date) => d ));
-
-        this.y.domain([
-            d3Array.min(TEMPERATURES, function(c) { return d3Array.min(c.values, function(d) { return d.temperature; }); }),
-            d3Array.max(TEMPERATURES, function(c) { return d3Array.max(c.values, function(d) { return d.temperature; }); })
-        ]);
-
-        this.z.domain(TEMPERATURES.map(function(c) { return c.id; }));
+        // this.y.domain([
+        //     d3Array.min(TEMPERATURES, function(c) { return d3Array.min(c.values, function(d) { return d.temperature; }); }),
+        //     d3Array.max(TEMPERATURES, function(c) { return d3Array.max(c.values, function(d) { return d.temperature; }); })
+        // ]);
+        //
+        // this.z.domain(TEMPERATURES.map(function(c) { return c.id; }));
     }
 
     private drawAxis(): void {
@@ -90,23 +87,23 @@ export class MultiSeriesComponent implements OnInit {
     }
 
     private drawPath(): void {
-        let city = this.g.selectAll('.city')
-            .data(TEMPERATURES)
-            .enter().append('g')
-            .attr('class', 'city');
-
-        city.append('path')
-            .attr('class', 'line')
-            .attr('d', (d) => this.line(d.values) )
-            .style('stroke', (d) => this.z(d.id) );
-
-        city.append('text')
-            .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
-            .attr('transform', (d) => 'translate(' + this.x(d.value.date) + ',' + this.y(d.value.temperature) + ')' )
-            .attr('x', 3)
-            .attr('dy', '0.35em')
-            .style('font', '10px sans-serif')
-            .text(function(d) { return d.id; });
+        // let city = this.g.selectAll('.city')
+        //     .data(TEMPERATURES)
+        //     .enter().append('g')
+        //     .attr('class', 'city');
+        //
+        // city.append('path')
+        //     .attr('class', 'line')
+        //     .attr('d', (d) => this.line(d.values) )
+        //     .style('stroke', (d) => this.z(d.id) );
+        //
+        // city.append('text')
+        //     .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
+        //     .attr('transform', (d) => 'translate(' + this.x(d.value.date) + ',' + this.y(d.value.temperature) + ')' )
+        //     .attr('x', 3)
+        //     .attr('dy', '0.35em')
+        //     .style('font', '10px sans-serif')
+        //     .text(function(d) { return d.id; });
     }
 
 }
