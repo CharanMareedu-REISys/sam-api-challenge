@@ -22,9 +22,12 @@ import { SetAsideByOppsTypeComponent } from './graphs/setaside-opps-type.compone
 
 const appRoutes: Routes = [
   { path: '', component: ListGraphComponent },
-  { path: 'filters', component: SamFiltersComponent },
   { path: 'org-awarded-amount', component: OrgAwardedAmountComponent },
   { path: 'setaside-opps-type', component: SetAsideByOppsTypeComponent },
+  { path: 'line-chart', component: LineChartComponent },
+  { path: 'bar-chart', component: BarChartComponent },
+  { path: 'brush-zoom', component: BrushZoomComponent },
+  { path: 'pie-chart', component: PieChartComponent }
 ];
 
 @NgModule({

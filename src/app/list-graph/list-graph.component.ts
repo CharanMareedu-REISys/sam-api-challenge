@@ -31,25 +31,25 @@ export class ListGraphComponent implements OnInit {
       title: "Line Chart",
       imgUrl: "../assets/line-chart.png",
       desc: "Line Chart",
-      routerLink : "/filters"
+      routerLink : "/line-chart"
     },
     {
       title: "Bar Chart",
       imgUrl: "../assets/bar-chart.png",
       desc: "Bar Chart",
-      routerLink : "/filters"
+      routerLink : "/bar-chart"
     },
     {
       title: "Brush & Zoom",
       imgUrl: "../assets/brush-zoom.png",
       desc: "Brush & Zoom",
-      routerLink : "/filters"
+      routerLink : "/brush-zoom"
     },
     {
       title: "Pie Chart",
       imgUrl: "../assets/pie-chart.png",
       desc: "Pie Chart",
-      routerLink : "/filters"
+      routerLink : "/pie-chart"
     },
   ];
 

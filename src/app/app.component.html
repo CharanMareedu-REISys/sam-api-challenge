@@ -1,8 +1,8 @@
-<mat-toolbar style="background-color: #425e5e;color: white;padding-left: 25%;">
-  <h1>SAM.GOV</h1>
+<mat-toolbar class="sam-toolbar">
+  <a routerLink="/">
+    <div>
+        <img src="../assets/sam-logo.png" class="sam-logo"/>
+    </div>
+</a>
 </mat-toolbar>
 <router-outlet></router-outlet>
-
-
-
-<!-- <app-sam-filters [showFilters]="showFilters" (formData)="getFormData($event)"></app-sam-filters> -->
