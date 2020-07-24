@@ -39,6 +39,8 @@ export class OrgAwardedAmountComponent {
 
     this.httpClient.get(request).subscribe(res => {
       this.data = {value: this.processApiData(res), orgs: orgs}
+      this.dataloaded = true;
+      this.cdr.detectChanges();
     });
   }
 

@@ -42,11 +42,12 @@ export class MultiSeriesComponent implements OnInit {
     }
 
     ngOnChanges(c) {
-        if (this.data) {
-            this.initChart();
-            this.drawAxis();
-            this.drawPath();
-        }
+       if(this.data){
+        this.initChart();
+        this.drawAxis();
+        this.drawPath();
+       }
+        
     }
 
     private initChart(): void {

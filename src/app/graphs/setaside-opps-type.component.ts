@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectorRef } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { SetAsides } from '../sam-filters/filter-data';
 
@@ -20,7 +20,8 @@ export interface DataResponse {
 })
 export class SetAsideByOppsTypeComponent {
   data: any[] = [];
-  constructor(private httpClient: HttpClient) {}
+  dataloaded : boolean = false;
+  constructor(private httpClient: HttpClient, private cdr:ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.httpClient
@@ -78,6 +79,8 @@ export class SetAsideByOppsTypeComponent {
           })
         })
         this.data = data;
+        this.dataloaded = true;
+        this.cdr.detectChanges();
       });
   }
 }

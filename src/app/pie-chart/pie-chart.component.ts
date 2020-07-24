@@ -33,8 +33,8 @@ export class PieChartComponent implements OnInit {
     private svg: any;
 
     constructor(private cdr:ChangeDetectorRef) {
-        this.width = 1400 - this.margin.left - this.margin.right;
-        this.height = 700 - this.margin.top - this.margin.bottom;
+        this.width = 1200 - this.margin.left - this.margin.right;
+        this.height = 600 - this.margin.top - this.margin.bottom;
         this.radius = Math.min(this.width, this.height) / 2;
     }
 
