@@ -5,6 +5,7 @@ import * as d3Scale from 'd3-scale';
 import * as d3Shape from 'd3-shape';
 
 import { POPULATION } from '../shared';
+import { OpportunityTypes } from '../sam-filters/filter-data';
 
 @Component({
     selector: 'app-pie-chart',
@@ -16,7 +17,9 @@ export class PieChartComponent implements OnInit {
 
     @Input() data = [];
 
-    title = 'Pie Chart';
+    oppTypes = OpportunityTypes;
+
+    //title = 'Pie Chart';
 
     private margin = {top: 20, right: 20, bottom: 30, left: 50};
     private width: number;
