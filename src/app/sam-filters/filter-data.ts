@@ -62,7 +62,7 @@ export const SetAsides = [
   {
     name: "Women-Owned Small Business (WOSB) Program Sole Source (FAR 19.15)",
     value: "WOSBSS",
-  },
+  }
 ];
 
 

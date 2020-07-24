@@ -1,3 +1,15 @@
 .axis .domain {
   display: none;
 }
+
+.graph-align{
+  display:flex;
+  align-items:center;
+  margin-left:20%;
+}
+
+.graph-header {
+  background-color: #c96567;
+  color: white;
+  padding-left: 20%;
+}

@@ -1,2 +1,12 @@
-<h2>{{ title }}</h2>
-<svg width="960" height="500"></svg>
+<mat-toolbar class="graph-header">
+    <h2>Set Aside By Opportunity Type</h2>
+</mat-toolbar>
+<div class="graph-align">
+    <svg width="1200" height="600"></svg>
+</div>
+
+
+        <div *ngFor="let setaside of setAsides" style="text-align:left;margin-left: 23%;margin-bottom: 0;">
+           <h3>{{setaside.value}} - {{setaside.name}}</h3>
+        </div>  
+

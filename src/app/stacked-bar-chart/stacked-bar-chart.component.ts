@@ -7,6 +7,7 @@ import * as d3Axis from 'd3-axis';
 import * as d3Array from 'd3-array';
 
 import { SAMPLE_DATA } from '../shared/data04';
+import { SetAsides } from '../sam-filters/filter-data';
 
 export interface Margin {
     top: number;
@@ -15,6 +16,13 @@ export interface Margin {
     left: number;
 }
 
+export interface Tile {
+    color: string;
+    cols: number;
+    rows: number;
+    text: string;
+  }
+
 @Component({
     selector: 'app-stacked-bar-chart',
     encapsulation: ViewEncapsulation.None,
@@ -22,10 +30,9 @@ export interface Margin {
     styleUrls: ['./stacked-bar-chart.component.css']
 })
 export class StackedBarChartComponent implements OnInit {
-
     @Input() data = null;
 
-    title = 'Stacked Bar Chart';
+    setAsides = SetAsides;
 
     private margin: Margin;
 
@@ -39,18 +46,18 @@ export class StackedBarChartComponent implements OnInit {
     private z: any;
     private g: any;
 
+    counter = 1;
+
     constructor() {}
 
     ngOnInit() {
-        console.log(this.data);
-        this.initMargins();
-        this.initSvg();
-        this.drawChart(this.data);
     }
 
     ngOnChanges(c) {
-        console.log(this.data);
-        console.log(c);
+        this.initMargins();
+        this.initSvg();
+        this.drawChart(this.data);
+        
     }
 
     private initMargins() {
@@ -68,10 +75,10 @@ export class StackedBarChartComponent implements OnInit {
             .rangeRound([0, this.width])
             .paddingInner(0.05)
             .align(0.1);
-        this.y = d3Scale.scaleLinear()
+        this.y = d3Scale.scaleSqrt()
             .rangeRound([this.height, 0]);
         this.z = d3Scale.scaleOrdinal()
-            .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00']);
+            .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00','green','blue']);
     }
 
     private drawChart(data: any[]) {
@@ -84,8 +91,17 @@ export class StackedBarChartComponent implements OnInit {
         });
         data.sort((a: any, b: any) => b.total - a.total);
 
-        this.x.domain(data.map((d: any) => d.State));
-        this.y.domain([0, d3Array.max(data, (d: any) => d.total)]).nice();
+        this.x.domain(data.map((d: any) => d.setaside));
+        this.y.domain([0, d3Array.max(data, (d: any) => {
+            let total = 0;
+            Object.keys(d).forEach(property=>{
+                if(property!=='total' && typeof d[property]=='number'){
+                    console.log(d[property]);
+                    total+=d[property];
+                }
+            });
+           return total;
+        })]).nice();
         this.z.domain(keys);
 
         this.g.append('g')
@@ -96,7 +112,7 @@ export class StackedBarChartComponent implements OnInit {
             .selectAll('rect')
             .data(d => d)
             .enter().append('rect')
-            .attr('x', d => this.x(d.data.State))
+            .attr('x', d => this.x(d.data.setaside))
             .attr('y', d => this.y(d[1]))
             .attr('height', d => this.y(d[0]) - this.y(d[1]))
             .attr('width', this.x.bandwidth());
@@ -116,11 +132,11 @@ export class StackedBarChartComponent implements OnInit {
             .attr('fill', '#000')
             .attr('font-weight', 'bold')
             .attr('text-anchor', 'start')
-            .text('Population');
+            .text('Number of Opportunities');
 
         let legend = this.g.append('g')
             .attr('font-family', 'sans-serif')
-            .attr('font-size', 10)
+            .attr('font-size', 15)
             .attr('text-anchor', 'end')
             .selectAll('g')
             .data(keys.slice().reverse())
