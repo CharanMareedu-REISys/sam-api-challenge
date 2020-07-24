@@ -51,7 +51,7 @@ export class MultiSeriesComponent implements OnInit {
         this.g = this.svg.append('g').attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
 
         this.x = d3Scale.scaleTime().domain([this.startDate, this.endDate]).range([0, this.svgWidth]);
-        this.y = d3Scale.scaleLinear().range([this.height, 0]);
+        this.y = d3Scale.scaleLinear().range([this.svgHeight, 0]);
         this.z = d3Scale.scaleOrdinal(d3ScaleChromatic.schemeCategory10);
 
         this.line = d3Shape.line()
@@ -59,12 +59,12 @@ export class MultiSeriesComponent implements OnInit {
             .x( (d: any) => this.x(d.date) )
             .y( (d: any) => this.y(d.temperature) );
 
-        // this.y.domain([
-        //     d3Array.min(TEMPERATURES, function(c) { return d3Array.min(c.values, function(d) { return d.temperature; }); }),
-        //     d3Array.max(TEMPERATURES, function(c) { return d3Array.max(c.values, function(d) { return d.temperature; }); })
-        // ]);
-        //
-        // this.z.domain(TEMPERATURES.map(function(c) { return c.id; }));
+        this.y.domain([
+            d3Array.min(this.data.values, function(c) { return c.amount }),
+            d3Array.max(this.data.values, function(c) { return c.amount })
+        ]);
+
+        this.z.domain(this.data.orgs);
     }
 
     private drawAxis(): void {
@@ -81,27 +81,27 @@ export class MultiSeriesComponent implements OnInit {
             .attr('y', 6)
             .attr('dy', '0.71em')
             .attr('fill', '#000')
-            .text('Temperature, ºF');
+            .text('Amount Awarded (Dollars)');
     }
 
     private drawPath(): void {
-        // let city = this.g.selectAll('.city')
-        //     .data(TEMPERATURES)
-        //     .enter().append('g')
-        //     .attr('class', 'city');
-        //
-        // city.append('path')
-        //     .attr('class', 'line')
-        //     .attr('d', (d) => this.line(d.values) )
-        //     .style('stroke', (d) => this.z(d.id) );
-        //
-        // city.append('text')
-        //     .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
-        //     .attr('transform', (d) => 'translate(' + this.x(d.value.date) + ',' + this.y(d.value.temperature) + ')' )
-        //     .attr('x', 3)
-        //     .attr('dy', '0.35em')
-        //     .style('font', '10px sans-serif')
-        //     .text(function(d) { return d.id; });
+        let org = this.g.selectAll('.org')
+            .data(data.values)
+            .enter().append('g')
+            .attr('class', 'org');
+
+        org.append('path')
+            .attr('class', 'line')
+            .attr('d', (d) => this.line(d.amount) )
+            .style('stroke', (d) => this.z(d.org) );
+
+        // org.append('text')
+            // .datum(function(d) { return {value: d.amount}; })
+            // .attr('transform', (d) => 'translate(' + this.x(d.value.date) + ',' + this.y(d.value.temperature) + ')' )
+            // .attr('x', 3)
+            // .attr('dy', '0.35em')
+            // .style('font', '10px sans-serif')
+            // .text(function(d) { return d.id; });
     }
 
 }
