@@ -19,15 +19,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { HttpClient, HttpHandler, HttpClientModule } from '@angular/common/http';
 import { OrgAwardedAmountComponent } from './graphs/org-awarded-amount.component';
 import { SetAsideByOppsTypeComponent } from './graphs/setaside-opps-type.component';
+import { TotalOppsByOppsTypeComponent } from './graphs/total-opps-opps-type.component';
 
 const appRoutes: Routes = [
   { path: '', component: ListGraphComponent },
   { path: 'org-awarded-amount', component: OrgAwardedAmountComponent },
   { path: 'setaside-opps-type', component: SetAsideByOppsTypeComponent },
+  { path: 'pie-chart', component: TotalOppsByOppsTypeComponent },
   { path: 'line-chart', component: LineChartComponent },
   { path: 'bar-chart', component: BarChartComponent },
-  { path: 'brush-zoom', component: BrushZoomComponent },
-  { path: 'pie-chart', component: PieChartComponent }
+  { path: 'brush-zoom', component: BrushZoomComponent }
 ];
 
 @NgModule({
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     SamFiltersComponent,
     ListGraphComponent,
     OrgAwardedAmountComponent,
-    SetAsideByOppsTypeComponent
+    SetAsideByOppsTypeComponent,
+    TotalOppsByOppsTypeComponent
   ],
   imports: [
     BrowserModule,

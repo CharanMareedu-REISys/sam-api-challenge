@@ -28,6 +28,12 @@ export class ListGraphComponent implements OnInit {
       routerLink : "/setaside-opps-type"
     },
     {
+      title: "Total Opportunities By Opportunity Type",
+      imgUrl: "../assets/pie-chart.png",
+      desc: "Pie Chart",
+      routerLink : "/pie-chart"
+    },
+    {
       title: "Line Chart",
       imgUrl: "../assets/line-chart.png",
       desc: "Line Chart",
@@ -44,12 +50,6 @@ export class ListGraphComponent implements OnInit {
       imgUrl: "../assets/brush-zoom.png",
       desc: "Brush & Zoom",
       routerLink : "/brush-zoom"
-    },
-    {
-      title: "Pie Chart",
-      imgUrl: "../assets/pie-chart.png",
-      desc: "Pie Chart",
-      routerLink : "/pie-chart"
     },
   ];
 

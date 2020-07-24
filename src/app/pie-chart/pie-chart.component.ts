@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, Input } from '@angular/core';
 
 import * as d3 from 'd3-selection';
 import * as d3Scale from 'd3-scale';
@@ -13,6 +13,8 @@ import { POPULATION } from '../shared';
     styleUrls: ['./pie-chart.component.css']
 })
 export class PieChartComponent implements OnInit {
+
+    @Input() data = [];
 
     title = 'Pie Chart';
 
@@ -34,6 +36,9 @@ export class PieChartComponent implements OnInit {
     }
 
     ngOnInit() {
+    }
+
+    ngOnChanges(){
         this.initSvg();
         this.drawPie();
     }
@@ -49,7 +54,7 @@ export class PieChartComponent implements OnInit {
             .innerRadius(this.radius - 40);
         this.pie = d3Shape.pie()
             .sort(null)
-            .value((d: any) => d.population);
+            .value((d: any) => d.count);
         this.svg = d3.select('svg')
             .append('g')
             .attr('transform', 'translate(' + this.width / 2 + ',' + this.height / 2 + ')');
@@ -57,14 +62,14 @@ export class PieChartComponent implements OnInit {
 
     private drawPie() {
         let g = this.svg.selectAll('.arc')
-            .data(this.pie(POPULATION))
+            .data(this.pie(this.data))
             .enter().append('g')
             .attr('class', 'arc');
         g.append('path').attr('d', this.arc)
-            .style('fill', (d: any) => this.color(d.data.age) );
+            .style('fill', (d: any) => this.color(d.data.oppstype) );
         g.append('text').attr('transform', (d: any) => 'translate(' + this.labelArc.centroid(d) + ')')
             .attr('dy', '.35em')
-            .text((d: any) => d.data.age);
+            .text((d: any) => d.data.oppstype);
     }
 
 }
