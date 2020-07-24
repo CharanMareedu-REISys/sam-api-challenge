@@ -2,3 +2,5 @@
 <ng-container *ngIf="dataloaded" >
     <app-multi-series-line-chart [data]="data" [startDate]="start" [endDate]="end" [width]="1200" [height]="600"></app-multi-series-line-chart>
 </ng-container>
+<button *ngIf="data" mat-flat-button color="primary" (onClick)="toggleShowData()">Show raw data</button>
+<div *ngIf="showData">{{data}}</div>

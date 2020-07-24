@@ -20,6 +20,7 @@ export class OrgAwardedAmountComponent {
   public data: any;
   public start;
   public end;
+  public showData = false;
   dataloaded : boolean = false;
 
   constructor(private httpClient: HttpClient, private cdr:ChangeDetectorRef) {}
@@ -82,5 +83,9 @@ export class OrgAwardedAmountComponent {
     }
 
     return data;
+  }
+
+  toggleShowData() {
+    this.showData = !this.showData;
   }
 }
