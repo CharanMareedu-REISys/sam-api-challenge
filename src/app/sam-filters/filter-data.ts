@@ -37,23 +37,23 @@ export const SetAsides = [
     value: "ISBEE",
   },
   { name: "Local Area Set-Aside (FAR 26.2)", value: "LAS" },
-  { name: "Partial Small Business Set-Aside (FAR 19.5)", value: "SBA" },
+  { name: "Partial Small Business Set-Aside (FAR 19.5)", value: "SBP" },
   {
     name:
       "Service-Disabled Veteran-Owned Small Business (SDVOSB) Set-Aside (FAR 19.14)",
-    value: "SBP",
+    value: "SDVOSBC",
   },
   {
     name:
       "Service-Disabled Veteran-Owned Small Business (SDVOSB) Sole Source (FAR 19.14)",
-    value: "SDVOSBC",
+    value: "SDVOSBS",
   },
-  { name: "Total Small Business Set-Aside (FAR 19.5)", value: "SDVOSBS" },
-  { name: "Very Small Business", value: "VSA" },
+  { name: "Total Small Business Set-Aside (FAR 19.5)", value: "SBA" },
+  { name: "Very Small Business", value: "VSB" },
   {
     name:
       "Veteran-Owned Small Business Set-Aside (specific to Department of Veterans Affairs)",
-    value: "VSB",
+    value: "VSA",
   },
   {
     name: "Women-Owned Small Business (WOSB) Program Set-Aside (FAR 19.15)",

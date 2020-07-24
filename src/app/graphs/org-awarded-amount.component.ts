@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { REPORTFILTERS } from '../sam-filters/filter-constant';
 import * as moment from 'moment';
 import { HttpClient } from '@angular/common/http';
@@ -8,6 +8,9 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './org-awarded-amount.component.html',
 })
 export class OrgAwardedAmountComponent {
+
+  graphTitle = "Awarded Amounts by Organization";
+
   public showFilters: REPORTFILTERS[] = [
     REPORTFILTERS.START_DATE,
     REPORTFILTERS.END_DATE,
@@ -17,11 +20,11 @@ export class OrgAwardedAmountComponent {
   public data: any;
   public start;
   public end;
+  dataloaded : boolean = false;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private cdr:ChangeDetectorRef) {}
 
   getFormData(evt) {
-    console.log(evt);
     const from = moment(evt.startDate).format('YYYY-MM-DD');
     const to = moment(evt.endDate).format('YYYY-MM-DD');
     this.callOrgAwardedApi(from, to, evt.organizations);
@@ -35,9 +38,7 @@ export class OrgAwardedAmountComponent {
     const request = protocol + host + `/orgAwardedAmount?from=${startDate}&to=${endDate}&orgs=${orgs.join('|')}`;
 
     this.httpClient.get(request).subscribe(res => {
-      console.log(res);
       this.data = {value: this.processApiData(res), orgs: orgs}
-      console.log(this.data);
     });
   }
 
@@ -49,7 +50,10 @@ export class OrgAwardedAmountComponent {
       const date = moment(opportunity.postedDate);
       const month = date.month();
       const year = date.year();
-      let matches = opportunity.award.amount.match(/\d+/g)
+      let matches = false;
+      if(opportunity.award && opportunity.award.amount && opportunity.award.amount.match(/\d+/g)){
+        matches = true;
+      }
       if(!matches){
         continue;
       }
@@ -71,6 +75,8 @@ export class OrgAwardedAmountComponent {
         }
       }
       data.push({org, values});
+      this.dataloaded = true;
+      this.cdr.detectChanges();
     }
 
     return data;

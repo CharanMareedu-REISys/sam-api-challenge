@@ -1,1 +1,3 @@
-<app-stacked-bar-chart [data]="data"></app-stacked-bar-chart>
+<ng-container *ngIf="dataloaded" >
+    <app-stacked-bar-chart [data]="data"></app-stacked-bar-chart>
+</ng-container>

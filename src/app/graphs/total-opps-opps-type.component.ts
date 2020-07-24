@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ChangeDetectorRef } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { SetAsides } from '../sam-filters/filter-data';
 
@@ -8,21 +8,23 @@ import { SetAsides } from '../sam-filters/filter-data';
 })
 export class TotalOppsByOppsTypeComponent {
     data: any[] = [];
-    constructor(private httpClient: HttpClient) { }
+    dataloaded : boolean = false;
+    constructor(private httpClient: HttpClient, private cdr:ChangeDetectorRef) { }
 
     ngOnInit(): void {
         this.httpClient
             .get("http://localhost:3000/totalOppsByOppsType")
             .subscribe((res) => {
-                console.log(res);
                 let keys = Object.keys(res);
                 let results = [];
                 keys.forEach(element => {
-                    if (res[element] && res[element]['oppstype'] != null) {
+                    if (res[element] && res[element]["oppstype"] != null) {
                         results.push(res[element]);
                     }
                 });
                 this.data = results;
+                this.dataloaded = true;
+                this.cdr.detectChanges();
             });
     }
 }

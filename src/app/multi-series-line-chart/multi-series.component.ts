@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, Input, ViewChild, ChangeDetectorRef } from '@angular/core';
 
 import * as d3 from 'd3-selection';
 import * as d3Scale from 'd3-scale';
@@ -33,16 +33,16 @@ export class MultiSeriesComponent implements OnInit {
     z;
     line;
 
-    constructor() {
+    constructor(private cdr:ChangeDetectorRef) {
 
     }
 
     ngOnInit() {
+        
     }
 
     ngOnChanges(c) {
         if (this.data) {
-            console.log(this.data);
             this.initChart();
             this.drawAxis();
             this.drawPath();
@@ -72,6 +72,7 @@ export class MultiSeriesComponent implements OnInit {
         ]);
 
         this.z.domain(this.data.orgs);
+        this.cdr.detectChanges();
     }
 
     private drawAxis(): void {
@@ -89,9 +90,11 @@ export class MultiSeriesComponent implements OnInit {
             .attr('dy', '0.71em')
             .attr('fill', '#000')
             .text('Amount Awarded (Dollars) - Square Root Scale');
+            this.cdr.detectChanges();
     }
 
     private drawPath(): void {
+        
         let org = this.g.selectAll('.org')
             .data(this.data.value)
             .enter().append('g')
@@ -109,6 +112,7 @@ export class MultiSeriesComponent implements OnInit {
         .attr('dy', '0.35em')
         .style('font', '10px sans-serif')
         .text(function(d) { return d.id; });
+        this.cdr.detectChanges();
     }
 
 }

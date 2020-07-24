@@ -1,2 +1,4 @@
-<app-sam-filters [showFilters]="showFilters" (formData)="getFormData($event)"></app-sam-filters>
-<app-multi-series-line-chart [data]="data" [startDate]="start" [endDate]="end" [width]="1200" [height]="600"></app-multi-series-line-chart>
+<app-sam-filters [graphTitle]="graphTitle" [showFilters]="showFilters" (formData)="getFormData($event)"></app-sam-filters>
+<ng-container *ngIf="dataloaded" >
+    <app-multi-series-line-chart [data]="data" [startDate]="start" [endDate]="end" [width]="1200" [height]="600"></app-multi-series-line-chart>
+</ng-container>

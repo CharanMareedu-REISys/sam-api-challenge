@@ -54,10 +54,11 @@ export class StackedBarChartComponent implements OnInit {
     }
 
     ngOnChanges(c) {
-        this.initMargins();
-        this.initSvg();
-        this.drawChart(this.data);
-        
+        if(this.data){
+            this.initMargins();
+            this.initSvg();
+            this.drawChart(this.data);
+        }
     }
 
     private initMargins() {
@@ -96,7 +97,6 @@ export class StackedBarChartComponent implements OnInit {
             let total = 0;
             Object.keys(d).forEach(property=>{
                 if(property!=='total' && typeof d[property]=='number'){
-                    console.log(d[property]);
                     total+=d[property];
                 }
             });

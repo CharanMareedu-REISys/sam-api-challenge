@@ -24,6 +24,7 @@ import { COMMA, ENTER } from "@angular/cdk/keycodes";
 })
 export class SamFiltersComponent implements OnInit {
   @Input() showFilters: REPORTFILTERS[] = null;
+  @Input() graphTitle =null;
   @Output() formData: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild("orgInput") orgInput: ElementRef;
 

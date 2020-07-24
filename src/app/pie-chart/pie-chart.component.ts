@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit, Input } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 
 import * as d3 from 'd3-selection';
 import * as d3Scale from 'd3-scale';
@@ -29,16 +29,13 @@ export class PieChartComponent implements OnInit {
     private color: any;
     private svg: any;
 
-    constructor() {
-        this.width = 900 - this.margin.left - this.margin.right;
-        this.height = 500 - this.margin.top - this.margin.bottom;
+    constructor(private cdr:ChangeDetectorRef) {
+        this.width = 1400 - this.margin.left - this.margin.right;
+        this.height = 700 - this.margin.top - this.margin.bottom;
         this.radius = Math.min(this.width, this.height) / 2;
     }
 
     ngOnInit() {
-    }
-
-    ngOnChanges(){
         this.initSvg();
         this.drawPie();
     }
@@ -50,14 +47,15 @@ export class PieChartComponent implements OnInit {
             .outerRadius(this.radius - 10)
             .innerRadius(0);
         this.labelArc = d3Shape.arc()
-            .outerRadius(this.radius - 40)
-            .innerRadius(this.radius - 40);
+            .outerRadius(this.radius - 100)
+            .innerRadius(this.radius - 100);
         this.pie = d3Shape.pie()
             .sort(null)
             .value((d: any) => d.count);
         this.svg = d3.select('svg')
             .append('g')
             .attr('transform', 'translate(' + this.width / 2 + ',' + this.height / 2 + ')');
+            this.cdr.detectChanges();
     }
 
     private drawPie() {
@@ -68,8 +66,9 @@ export class PieChartComponent implements OnInit {
         g.append('path').attr('d', this.arc)
             .style('fill', (d: any) => this.color(d.data.oppstype) );
         g.append('text').attr('transform', (d: any) => 'translate(' + this.labelArc.centroid(d) + ')')
-            .attr('dy', '.35em')
+            .attr('dy', '.01em')
             .text((d: any) => d.data.oppstype);
+            this.cdr.detectChanges();
     }
 
 }
