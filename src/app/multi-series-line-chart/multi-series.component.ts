@@ -88,7 +88,7 @@ export class MultiSeriesComponent implements OnInit {
             .attr('y', 6)
             .attr('dy', '0.71em')
             .attr('fill', '#000')
-            .text('Amount Awarded (Dollars)');
+            .text('Amount Awarded (Dollars) - Square Root Scale');
     }
 
     private drawPath(): void {
