@@ -11,11 +11,12 @@ export class OrgAwardedAmountComponent {
   public showFilters: REPORTFILTERS[] = [
     REPORTFILTERS.START_DATE,
     REPORTFILTERS.END_DATE,
-    REPORTFILTERS.OPPORTUNITIES,
     REPORTFILTERS.ORGANIZATIONS,
   ];
 
-  public data = {};
+  public data: any;
+  public start;
+  public end;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -24,6 +25,8 @@ export class OrgAwardedAmountComponent {
     const from = moment(evt.startDate).format('YYYY-MM-DD');
     const to = moment(evt.endDate).format('YYYY-MM-DD');
     this.callOrgAwardedApi(from, to, evt.organizations);
+    this.start = evt.startDate;
+    this.end = evt.endDate;
   }
 
   callOrgAwardedApi(startDate, endDate, orgs) {
@@ -33,8 +36,7 @@ export class OrgAwardedAmountComponent {
 
     this.httpClient.get(request).subscribe(res => {
       console.log(res);
-      this.data.values = this.processApiData(res);
-      this.data.orgs = orgs;
+      this.data = {value: this.processApiData(res), orgs: orgs}
       console.log(this.data);
     });
   }
@@ -47,22 +49,28 @@ export class OrgAwardedAmountComponent {
       const date = moment(opportunity.postedDate);
       const month = date.month();
       const year = date.year();
-      const amount = opportunity.award.amount;
+      let matches = opportunity.award.amount.match(/\d+/g)
+      if(!matches){
+        continue;
+      }
+      const amount = parseInt(opportunity.award.amount.match(/\d+/g)[0], 10);
       const org = opportunity.department;
 
-      if (!hash[year]) { hash.year = {}; }
-      if (!hash[year][month]) { hash.year.month = {}; }
-      if (!hash[year][month][org]) { hash.year.month.org = 0; }
-      hash[year][month][org] += amount;
+      if (!hash[org]) { hash[org] = {}; }
+      if (!hash[org][year]) { hash[org][year] = {}; }
+      if (!hash[org][year][month]) { hash[org][year][month] = 0; }
+      hash[org][year][month] += amount;
     }
 
     let data = [];
-    for (let year of Object.keys(hash)) {
-      for (let month of Object.keys(hash[year])) {
-        for (let org of Object.keys(hash[year][month])) {
-          data.push({date: moment().year(year).month(month).format('YYYY-MM-DD'), org: org, amount: hash[year][month][org]});
+    for (let org of Object.keys(hash)) {
+      let values = [];
+      for (let year of Object.keys(hash[org])) {
+        for (let month of Object.keys(hash[org][year])) {
+          values.push({date: new Date(moment().year(parseInt(year, 10)).month(month).format('YYYY-MM-DD')), amount: hash[org][year][month]});
         }
       }
+      data.push({org, values});
     }
 
     return data;
