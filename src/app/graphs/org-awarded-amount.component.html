@@ -2,3 +2,7 @@
 <ng-container *ngIf="dataloaded" >
     <app-multi-series-line-chart [data]="data" [startDate]="start" [endDate]="end" [width]="1200" [height]="600"></app-multi-series-line-chart>
 </ng-container>
+<div *ngIf="showData">{{getData()}}</div>
+<button *ngIf="data" mat-flat-button color="primary" (click)="toggleShowData()">{{showData?'Hide Raw Data':'Show Raw Data'}}</button>
+
+

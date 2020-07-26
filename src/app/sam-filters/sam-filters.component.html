@@ -42,9 +42,9 @@
             </mat-chip>
             <input placeholder="Select Organization" #orgInput formControlName="organizations" [matAutocomplete]="auto"
                 [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)" aria-label="Enter Organization">
         </mat-chip-list>
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)" aria-label="Organizations">
             <mat-option *ngFor="let org of orgsFilteredOptions | async" [value]="org">
                 {{org}}
             </mat-option>

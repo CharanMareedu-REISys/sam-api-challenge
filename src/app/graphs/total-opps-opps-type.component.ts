@@ -1,6 +1,6 @@
 import { Component, ChangeDetectorRef } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { SetAsides } from '../sam-filters/filter-data';
+import { OpportunityCodeTypes } from '../sam-filters/filter-data';
 
 @Component({
     selector: "total-opps-opps-type",
@@ -9,6 +9,7 @@ import { SetAsides } from '../sam-filters/filter-data';
 export class TotalOppsByOppsTypeComponent {
     data: any[] = [];
     dataloaded : boolean = false;
+    public showData = false;
     constructor(private httpClient: HttpClient, private cdr:ChangeDetectorRef) { }
 
     ngOnInit(): void {
@@ -22,9 +23,31 @@ export class TotalOppsByOppsTypeComponent {
                         results.push(res[element]);
                     }
                 });
-                this.data = results;
+                let transform = [];
+                results.map(item=>{
+                    let obj = {...item};
+                    let found = false;
+                    OpportunityCodeTypes.forEach(opp=>{
+                        if(obj.oppstype == opp.name){
+                            obj.oppstype = opp.code;
+                            found = true;
+                        }
+                    });
+                    if(found){
+                        transform.push(obj);
+                    }
+                });
+                this.data = transform;
                 this.dataloaded = true;
                 this.cdr.detectChanges();
             });
     }
+
+    toggleShowData() {
+        this.showData = !this.showData;
+      }
+    
+      getData(){
+        return JSON.stringify(this.data);
+      }
 }

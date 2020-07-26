@@ -1,8 +1,9 @@
 <mat-toolbar class="graph-header">
     <h2>Total Opportunities By Opportunity Type (2017 - 2020)</h2>
 </mat-toolbar>
-<svg width="1400" height="700" class="graph-align"></svg>
-
-<div *ngFor="let oppstype of oppTypes" style="text-align:left;margin-left: 20%;margin-bottom: 0;">
-   <h3>{{oppstype}}</h3>
-</div>  
+<div class="graph-align" tabindex="1">
+    <svg width="1200" height="580" class="graph-align" ></svg>
+</div>
+<div *ngFor="let oppstype of oppTypes" style="text-align:left;margin-left: 40%;margin-bottom: 0;">
+    <h3 [name]="oppstype.name">{{oppstype.code}} - {{oppstype.name}} ( {{oppstype.count}} )</h3>
+ </div>  

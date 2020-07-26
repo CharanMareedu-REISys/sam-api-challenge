@@ -21,6 +21,7 @@ export interface DataResponse {
 export class SetAsideByOppsTypeComponent {
   data: any[] = [];
   dataloaded : boolean = false;
+  public showData = false;
   constructor(private httpClient: HttpClient, private cdr:ChangeDetectorRef) {}
 
   ngOnInit(): void {
@@ -82,5 +83,13 @@ export class SetAsideByOppsTypeComponent {
         this.dataloaded = true;
         this.cdr.detectChanges();
       });
+  }
+
+  toggleShowData() {
+    this.showData = !this.showData;
+  }
+
+  getData(){
+    return JSON.stringify(this.data);
   }
 }
