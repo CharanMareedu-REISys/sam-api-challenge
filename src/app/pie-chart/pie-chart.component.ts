@@ -5,7 +5,7 @@ import * as d3Scale from 'd3-scale';
 import * as d3Shape from 'd3-shape';
 
 import { POPULATION } from '../shared';
-import { OpportunityTypes } from '../sam-filters/filter-data';
+import { OpportunityCodeTypes } from '../sam-filters/filter-data';
 
 @Component({
     selector: 'app-pie-chart',
@@ -17,7 +17,7 @@ export class PieChartComponent implements OnInit {
 
     @Input() data = [];
 
-    oppTypes = OpportunityTypes;
+    oppTypes = OpportunityCodeTypes;
 
     //title = 'Pie Chart';
 
@@ -41,6 +41,7 @@ export class PieChartComponent implements OnInit {
     ngOnInit() {
         this.initSvg();
         this.drawPie();
+        this.addCountToOpps();
     }
 
     private initSvg() {
@@ -74,4 +75,16 @@ export class PieChartComponent implements OnInit {
             this.cdr.detectChanges();
     }
 
+    addCountToOpps(){
+        console.log(this.data);
+        if(this.data){
+            this.data.forEach(item=>{
+                this.oppTypes.forEach(opp=>{
+                    if(item.oppstype == opp.code){
+                        opp["count"] = item.count;
+                    }
+                });
+            })
+        }
+    }
 }

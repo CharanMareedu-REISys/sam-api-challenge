@@ -88,4 +88,8 @@ export class OrgAwardedAmountComponent {
   toggleShowData() {
     this.showData = !this.showData;
   }
+
+  getData(){
+    return JSON.stringify(this.data.value);
+  }
 }

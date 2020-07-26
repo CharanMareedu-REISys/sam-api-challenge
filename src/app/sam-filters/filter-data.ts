@@ -62,18 +62,52 @@ export const SetAsides = [
   {
     name: "Women-Owned Small Business (WOSB) Program Sole Source (FAR 19.15)",
     value: "WOSBSS",
-  }
+  },
 ];
 
-
 export const OpportunityTypes = [
-    "Special Notice",
-    "Sources Sought",
-    "Presolicitation",
-    "Intent to Bundle",
-    "Solicitation",
-    "Combined Synopsis/Solicitation",
-    "Award Notice",
-    "Justification",
-    "Sale of Surplus Property",
-  ];
+  "Special Notice",
+  "Sources Sought",
+  "Presolicitation",
+  "Intent to Bundle",
+  "Solicitation",
+  "Combined Synopsis/Solicitation",
+  "Award Notice",
+  "Justification",
+  "Sale of Surplus Property",
+];
+
+export const OpportunityCodeTypes = [
+  {
+    name: "Special Notice",
+    code: "S",
+  },
+  {
+    name: "Sources Sought",
+    code: "R",
+  },
+  {
+    name: "Presolicitation",
+    code: "P",
+  },
+  {
+    name: "Solicitation",
+    code: "O",
+  },
+  {
+    name: "Combined Synopsis/Solicitation",
+    code: "K",
+  },
+  {
+    name: "Award Notice",
+    code: "A",
+  },
+  {
+    name: "Justification",
+    code: "U",
+  },
+  {
+    name: "Sale of Surplus Property",
+    code: "G",
+  },
+];
